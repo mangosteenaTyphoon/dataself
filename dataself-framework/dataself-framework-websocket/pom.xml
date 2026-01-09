@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.shanzhu</groupId>
+        <artifactId>dataself-framework</artifactId>
+        <version>3.5.4</version>
+    </parent>
+
+    <artifactId>dataself-framework-websocket</artifactId>
+    <description>websocket</description>
+
+    <dependencies>
+
+        <!-- websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!--dataself Redis-->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-redis</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--dataself Redis-->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-security</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

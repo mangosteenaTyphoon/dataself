@@ -1,0 +1,2 @@
+com.shanzhu.dataself.framework.log.LogAutoConfiguration
+com.shanzhu.dataself.framework.log.filter.WebLogFilter

@@ -1,0 +1,4 @@
+com.shanzhu.dataself.api.system.feign.factory.RemoteLogFallbackFactory
+com.shanzhu.dataself.api.system.feign.factory.RemoteOauth2ClientDetailsFallbackFactory
+com.shanzhu.dataself.api.system.feign.factory.RemoteUserFallbackFactory
+com.shanzhu.dataself.api.system.feign.factory.RemoteDeptFallbackFactory

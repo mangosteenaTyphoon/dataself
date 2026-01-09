@@ -1,0 +1,6 @@
+com.shanzhu.dataself.framework.security.support.service.manager.TwTUserDetailsServiceImpl
+com.shanzhu.dataself.framework.security.support.service.manager.TwTSmsDetailsServiceImpl
+com.shanzhu.dataself.framework.security.support.service.impl.TWTRedisOAuth2AuthorizationService
+com.shanzhu.dataself.framework.security.support.service.impl.TWTRedisOAuth2AuthorizationConsentService
+com.shanzhu.dataself.framework.security.support.service.impl.TWTRemoteRegisteredClientRepository
+com.shanzhu.dataself.framework.security.aspect.TWTSecurityInnerAspect

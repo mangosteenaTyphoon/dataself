@@ -1,0 +1,2 @@
+com.shanzhu.dataself.framework.openfeign.TwFeignAutoConfiguration
+com.shanzhu.dataself.framework.openfeign.sentinel.SentinelAutoConfiguration

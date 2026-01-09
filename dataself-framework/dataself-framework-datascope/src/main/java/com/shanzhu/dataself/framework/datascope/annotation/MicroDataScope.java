@@ -1,0 +1,25 @@
+package com.shanzhu.dataself.framework.datascope.annotation;
+
+import java.lang.annotation.*;
+
+/**
+ * @author shanzhu
+ * @WebSite shanzhu.cloud
+ * @Description: 分布式数据权限
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface MicroDataScope {
+
+	/**
+	 * 管理部门ID字段写法
+	 */
+	String deptIdField() default "dept_id";
+
+	/**
+	 * 用户ID字段写法
+	 */
+	String userIdField() default "";
+
+}

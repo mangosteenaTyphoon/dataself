@@ -1,0 +1,107 @@
+package com.shanzhu.dataself.server.ai.controller;
+
+import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
+import com.shanzhu.dataself.ai.domain.AiDoc;
+import com.shanzhu.dataself.ai.domain.dto.AiDocDTO;
+import com.shanzhu.dataself.framework.core.application.controller.TWTController;
+import com.shanzhu.dataself.framework.core.application.domain.JsonResult;
+import com.shanzhu.dataself.framework.core.application.page.TableDataInfo;
+import com.shanzhu.dataself.framework.jdbc.web.utils.PageUtils;
+import com.shanzhu.dataself.framework.log.annotation.Log;
+import com.shanzhu.dataself.framework.log.enums.BusinessType;
+import com.shanzhu.dataself.server.ai.service.IAiDocService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import net.dreamlu.mica.xss.core.XssCleanIgnore;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * AI知识库文档Controller
+ *
+ * @author shanzhu
+ * @WebSite shanzhu.cloud
+ * @date 2024-11-16
+ */
+@Tag(description = "AiDocController", name = "AI知识库文档")
+@RestController
+@RequestMapping("/doc")
+public class AiDocController extends TWTController {
+
+	private final IAiDocService aiDocService;
+
+	public AiDocController(IAiDocService aiDocService) {
+		this.aiDocService = aiDocService;
+	}
+
+	/**
+	 * 查询AI知识库文档分页
+	 */
+	@Operation(summary = "查询AI知识库文档分页")
+	@PreAuthorize("@role.hasPermi('ai:doc:list')")
+	@GetMapping("/pageQuery")
+	public JsonResult<TableDataInfo<AiDoc>> pageQuery(AiDoc aiDoc) {
+		PageUtils.startPage();
+		List<AiDoc> list = aiDocService.selectAiDocList(aiDoc);
+		return JsonResult.success(PageUtils.getDataTable(list));
+	}
+
+	/**
+	 * 查询AI知识库文档列表
+	 */
+	@Operation(summary = "查询AI知识库文档列表")
+	@PreAuthorize("@role.hasPermi('ai:doc:list')")
+	@GetMapping("/list")
+	public JsonResult<List<AiDoc>> listQuery(AiDoc aiDoc) {
+		return JsonResult.success(aiDocService.selectAiDocList(aiDoc));
+	}
+
+	/**
+	 * 导出AI知识库文档列表
+	 */
+	@ResponseExcel(name = "AI知识库文档")
+	@Operation(summary = "导出AI知识库文档列表")
+	@PreAuthorize("@role.hasPermi('ai:doc:export')")
+	@Log(service = "AI知识库文档", businessType = BusinessType.EXPORT)
+	@PostMapping("/export")
+	public List<AiDoc> export(AiDoc aiDoc) {
+		return aiDocService.selectAiDocList(aiDoc);
+	}
+
+	/**
+	 * 获取AI知识库文档详细信息
+	 */
+	@Operation(summary = "获取AI知识库文档详细信息")
+	@PreAuthorize("@role.hasPermi('ai:doc:query')")
+	@GetMapping(value = "/{docId}")
+	public JsonResult<AiDoc> getInfo(@PathVariable("docId") Long docId) {
+		return JsonResult.success(aiDocService.selectAiDocByDocId(docId));
+	}
+
+	/**
+	 * 新增AI知识库文档
+	 */
+	@XssCleanIgnore
+	@Operation(summary = "新增AI知识库文档")
+	@PreAuthorize("@role.hasPermi('ai:doc:add')")
+	@Log(service = "AI知识库文档", businessType = BusinessType.INSERT)
+	@PostMapping
+	public JsonResult<Boolean> add(@Validated @RequestBody AiDocDTO aiDocDTO) {
+		return JsonResult.success(aiDocService.insertAiDoc(aiDocDTO));
+	}
+
+	/**
+	 * 删除AI知识库文档
+	 */
+	@Operation(summary = "删除AI知识库文档")
+	@PreAuthorize("@role.hasPermi('ai:doc:remove')")
+	@Log(service = "AI知识库文档", businessType = BusinessType.DELETE)
+	@DeleteMapping("/{docIds}")
+	public JsonResult<String> remove(@PathVariable Long[] docIds) {
+		return json(aiDocService.deleteAiDocByDocIds(docIds));
+	}
+
+}

@@ -1,0 +1,12 @@
+{
+  "project": {
+    "packageName": "com.shanzhu",
+    "version": "3.0.0",
+    "backendPath": "shanzhu",
+    "frontendPath": "shanzhu-ui"
+  },
+  "developer": {
+    "author": "shanzhu",
+    "email": "2471835953@qq.com"
+  }
+}

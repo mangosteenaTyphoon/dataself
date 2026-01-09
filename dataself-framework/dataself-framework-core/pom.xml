@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dataself-framework</artifactId>
+        <groupId>com.shanzhu</groupId>
+        <version>3.5.4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <artifactId>dataself-framework-core</artifactId>
+    <description>通用核心</description>
+
+    <dependencies>
+
+        <!--webmvc-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- SpringCloud Openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!--Swagger-->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-swagger</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--工具模块-->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-utils</artifactId>
+        </dependency>
+
+        <!--hibernate-validator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!--Excel-->
+        <dependency>
+            <groupId>com.pig4cloud.excel</groupId>
+            <artifactId>excel-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--dataself Redis-->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-redis</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--caffeine-->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--XSS-->
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-xss</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

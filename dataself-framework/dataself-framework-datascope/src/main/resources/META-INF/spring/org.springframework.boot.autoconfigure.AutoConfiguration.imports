@@ -1,0 +1,3 @@
+com.shanzhu.dataself.framework.datascope.aspect.SysDataScopeAspect
+com.shanzhu.dataself.framework.datascope.aspect.MicroDataScopeAspect
+com.shanzhu.dataself.framework.datascope.service.impl.MicroDataScopeServiceImpl

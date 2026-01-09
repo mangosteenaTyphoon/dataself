@@ -1,0 +1,4 @@
+com.shanzhu.dataself.framework.core.config.properties.MessageSourceProperties
+com.shanzhu.dataself.framework.core.config.MessageSourceConfig
+com.shanzhu.dataself.framework.core.handler.TWTExceptionHandler
+com.shanzhu.dataself.framework.core.config.JacksonConfiguration

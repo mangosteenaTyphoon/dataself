@@ -1,0 +1,104 @@
+package com.shanzhu.dataself.server.ai.controller;
+
+import java.util.List;
+
+import com.shanzhu.dataself.ai.domain.AiMcp;
+import com.shanzhu.dataself.server.ai.service.IAiMcpService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import com.shanzhu.dataself.framework.log.annotation.Log;
+import com.shanzhu.dataself.framework.log.enums.BusinessType;
+import com.shanzhu.dataself.framework.core.application.page.TableDataInfo;
+import com.shanzhu.dataself.framework.core.application.controller.TWTController;
+import com.shanzhu.dataself.framework.core.application.domain.JsonResult;
+import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import com.shanzhu.dataself.framework.jdbc.web.utils.PageUtils;
+
+/**
+ * AI MCP服务Controller
+ *
+ * @author shanzhu
+ * @WebSite shanzhu.cloud
+ * @date 2025-03-31
+ */
+@Tag(description = "AiMcpController", name = "AI MCP服务")
+@RestController
+@RequestMapping("/mcp")
+public class AiMcpController extends TWTController {
+
+	@Autowired
+	private IAiMcpService aiMcpService;
+
+	/**
+	 * 查询AI MCP服务分页
+	 */
+	@Operation(summary = "查询AI MCP服务分页")
+	@PreAuthorize("@role.hasPermi('ai:mcp:list')")
+	@GetMapping("/pageQuery")
+	public JsonResult<TableDataInfo<AiMcp>> pageQuery(AiMcp aiMcp) {
+		PageUtils.startPage();
+		List<AiMcp> list = aiMcpService.selectAiMcpList(aiMcp);
+		return JsonResult.success(PageUtils.getDataTable(list));
+	}
+
+	/**
+	 * 导出AI MCP服务列表
+	 */
+	@ResponseExcel(name = "MCP服务")
+	@Operation(summary = "导出AI MCP服务列表")
+	@PreAuthorize("@role.hasPermi('ai:mcp:export')")
+	@Log(service = "AI MCP服务", businessType = BusinessType.EXPORT)
+	@PostMapping("/export")
+	public List<AiMcp> export(AiMcp aiMcp) {
+		return aiMcpService.selectAiMcpList(aiMcp);
+	}
+
+	/**
+	 * 获取AI MCP服务详细信息
+	 */
+	@Operation(summary = "获取AI MCP服务详细信息")
+	@PreAuthorize("@role.hasPermi('ai:mcp:query')")
+	@GetMapping(value = "/{mcpId}")
+	public JsonResult<AiMcp> getInfo(@PathVariable("mcpId") Long mcpId) {
+		return JsonResult.success(aiMcpService.selectAiMcpByMcpId(mcpId));
+	}
+
+	/**
+	 * 新增AI MCP服务
+	 */
+	@Operation(summary = "新增AI MCP服务")
+	@PreAuthorize("@role.hasPermi('ai:mcp:add')")
+	@Log(service = "AI MCP服务", businessType = BusinessType.INSERT)
+	@PostMapping
+	public JsonResult<String> add(@Validated @RequestBody AiMcp aiMcp) {
+		return json(aiMcpService.insertAiMcp(aiMcp));
+	}
+
+	/**
+	 * 修改AI MCP服务
+	 */
+	@Operation(summary = "修改AI MCP服务")
+	@PreAuthorize("@role.hasPermi('ai:mcp:edit')")
+	@Log(service = "AI MCP服务", businessType = BusinessType.UPDATE)
+	@PutMapping
+	public JsonResult<String> edit(@Validated @RequestBody AiMcp aiMcp) {
+		return json(aiMcpService.updateAiMcp(aiMcp));
+	}
+
+	/**
+	 * 删除AI MCP服务
+	 */
+	@Operation(summary = "删除AI MCP服务")
+	@PreAuthorize("@role.hasPermi('ai:mcp:remove')")
+	@Log(service = "AI MCP服务", businessType = BusinessType.DELETE)
+	@DeleteMapping("/{mcpIds}")
+	public JsonResult<String> remove(@PathVariable Long[] mcpIds) {
+		return json(aiMcpService.deleteAiMcpByMcpIds(mcpIds));
+	}
+
+}

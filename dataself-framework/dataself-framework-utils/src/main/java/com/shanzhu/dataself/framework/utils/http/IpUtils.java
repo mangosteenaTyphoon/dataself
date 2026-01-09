@@ -1,0 +1,105 @@
+package com.shanzhu.dataself.framework.utils.http;
+
+import com.shanzhu.dataself.framework.utils.exception.TWTUtilsException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+/**
+ * @author shanzhu
+ * @WebSite shanzhu.cloud
+ * @Description: IP工具类
+ */
+public class IpUtils {
+
+	public IpUtils() {
+		throw new TWTUtilsException("This is a utility class and cannot be instantiated");
+	}
+
+	private static final Logger log = LoggerFactory.getLogger(IpUtils.class);
+
+	private static final String UNKNOWN = "unknown";
+
+	/**
+	 * 获取客户端IP
+	 * @return IP
+	 */
+	public static String getIpAddr() {
+		return getIpAddr(ServletUtils.getRequest().get());
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
+	public static String getIpAddr(HttpServletRequest request) {
+
+		if (request == null) {
+			return "unknown";
+		}
+
+		String ip = null;
+
+		// X-Forwarded-For：Squid 服务代理
+		String ipAddresses = request.getHeader("X-Forwarded-For");
+		if (StringUtils.isEmpty(ipAddresses) || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// Proxy-Client-IP：apache 服务代理
+			ipAddresses = request.getHeader("Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ipAddresses) || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// WL-Proxy-Client-IP：weblogic 服务代理
+			ipAddresses = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ipAddresses) || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// HTTP_CLIENT_IP：有些代理服务器
+			ipAddresses = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (StringUtils.isEmpty(ipAddresses) || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// X-Real-IP：nginx服务代理
+			ipAddresses = request.getHeader("X-Real-IP");
+		}
+
+		// 有些网络通过多层代理，那么获取到的ip就会有多个，一般都是通过逗号（,）分割开来，并且第一个ip为客户端的真实IP
+		if (StringUtils.isNotEmpty(ipAddresses)) {
+			ip = ipAddresses.split(",")[0];
+		}
+
+		// 还是不能获取到，最后再通过request.getRemoteAddr();获取
+		if (StringUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			ip = request.getRemoteAddr();
+		}
+		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+	}
+
+	/**
+	 * 获得服务器IP
+	 * @return String
+	 */
+	public static String getHostIp() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		}
+		catch (UnknownHostException e) {
+			return "127.0.0.1";
+		}
+	}
+
+	/**
+	 * 获取服务器名称
+	 * @return String
+	 */
+	public static String getHostName() {
+		try {
+			return InetAddress.getLocalHost().getHostName();
+		}
+		catch (UnknownHostException e) {
+			return "未知";
+		}
+	}
+
+}

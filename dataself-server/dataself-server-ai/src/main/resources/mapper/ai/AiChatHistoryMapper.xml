@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shanzhu.dataself.server.ai.mapper.AiChatHistoryMapper">
+    
+    <resultMap type="AiChatHistory" id="AiChatHistoryResult">
+        <result property="chatHistoryId"    column="chat_history_id"    />
+        <result property="msgId"    column="msg_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="knowledgeId"    column="knowledge_id"    />
+        <result property="sendUserId"    column="send_user_id"    />
+        <result property="sendUserName"    column="send_user_name"    />
+        <result property="createByType"    column="create_by_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectAiChatHistoryVo">
+        select chat_history_id, msg_id, user_id, knowledge_id, send_user_id, send_user_name, create_by_type, create_time, del_flag from ai_chat_history
+    </sql>
+
+    <select id="selectAiChatHistoryListByUserId" parameterType="SearchAiChatHistoryDTO" resultType="AiChatHistoryVO">
+        SELECT ch.create_by_type,
+               chc.content
+        FROM ai_chat_history AS ch
+                 LEFT JOIN ai_chat_history_content AS chc ON chc.chat_history_id = ch.chat_history_id
+        WHERE ch.user_id = #{userId}
+        and ch.knowledge_id = #{knowledgeId}
+        ORDER BY create_time desc LIMIT #{multiRound}
+    </select>
+
+    <select id="selectKnowledgeAiChatHistoryListByUserId" parameterType="AiChatHistory" resultType="AiChatHistoryPageVO">
+        SELECT ch.chat_history_id,
+               ch.msg_id,
+               ch.user_id,
+               ch.knowledge_id,
+               ch.send_user_id,
+               ch.send_user_name,
+               ch.create_by_type,
+               ch.create_time,
+               chc.content
+        FROM ai_chat_history AS ch
+                 LEFT JOIN ai_chat_history_content AS chc ON chc.chat_history_id = ch.chat_history_id
+        WHERE ch.user_id = #{userId}
+          and ch.knowledge_id = #{knowledgeId}
+        ORDER BY create_time desc
+    </select>
+        
+    <insert id="insertAiChatHistory" parameterType="AiChatHistory" useGeneratedKeys="true" keyProperty="chatHistoryId">
+        insert into ai_chat_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            chat_history_id,
+            <if test="msgId != null and msgId != ''">msg_id,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="knowledgeId != null">knowledge_id,</if>
+            <if test="sendUserId != null and sendUserId != ''">send_user_id,</if>
+            <if test="sendUserName != null and sendUserName != ''">send_user_name,</if>
+            <if test="createByType != null">create_by_type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{chatHistoryId},
+            <if test="msgId != null and msgId != ''">#{msgId},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="knowledgeId != null">#{knowledgeId},</if>
+            <if test="sendUserId != null and sendUserId != ''">#{sendUserId},</if>
+            <if test="sendUserName != null and sendUserName != ''">#{sendUserName},</if>
+            <if test="createByType != null">#{createByType},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+</mapper>

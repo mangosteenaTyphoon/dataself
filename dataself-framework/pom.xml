@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dataself</artifactId>
+        <groupId>com.shanzhu</groupId>
+        <version>3.5.4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dataself-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <description>核心模块</description>
+    <modules>
+        <module>dataself-framework-security</module>
+        <module>dataself-framework-redis</module>
+        <module>dataself-framework-utils</module>
+        <module>dataself-framework-core</module>
+        <module>dataself-framework-log</module>
+        <module>dataself-framework-datasource</module>
+        <module>dataself-framework-swagger</module>
+        <module>dataself-framework-datascope</module>
+        <module>dataself-framework-jdbc</module>
+        <module>dataself-framework-openfeign</module>
+        <module>dataself-framework-job</module>
+        <module>dataself-framework-snowflake</module>
+        <module>dataself-framework-websocket</module>
+    </modules>
+
+    <dependencies>
+
+        <!--日志工具-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

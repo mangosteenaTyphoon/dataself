@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.shanzhu</groupId>
+    <artifactId>dataself</artifactId>
+    <packaging>pom</packaging>
+    <version>3.5.4</version>
+
+    <name>dataself</name>
+    <url>https://shanzhu.cloud</url>
+    <description>数据驱动自我管理系统</description>
+
+    <organization>
+        <name>shanzhu</name>
+        <url>https://shanzhu.cloud</url>
+    </organization>
+
+
+    <properties>
+        <dataself.version>3.5.4</dataself.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <spring-boot-dependencies.version>3.5.4</spring-boot-dependencies.version>
+        <spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2023.0.3.3</spring-cloud-alibaba-dependencies.version>
+
+        <swagger-core.version>2.2.32</swagger-core.version>
+        <springdoc.version>2.8.8</springdoc.version>
+        <knife4j.version>3.0.3</knife4j.version>
+
+        <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
+        <shardingsphere-jdbc.version>5.4.1</shardingsphere-jdbc.version>
+
+        <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
+        <mybatis.version>3.0.4</mybatis.version>
+        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
+        <commons.io.version>2.18.0</commons.io.version>
+        <velocity.version>2.4</velocity.version>
+        <hutool.version>5.8.36</hutool.version>
+        <redisson.version>3.41.0</redisson.version>
+        <jasypt.version>3.0.5</jasypt.version>
+        <jaxb.version>2.3.5</jaxb.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
+        <just-auth.version>1.16.7</just-auth.version>
+        <xxl-job.version>3.1.0</xxl-job.version>
+        <forest.version>1.6.4</forest.version>
+        <javacv.version>1.5.11</javacv.version>
+
+        <xss-spring-boot-starter.version>3.1.5.1</xss-spring-boot-starter.version>
+        <excel-spring-boot-starter.version>3.4.2</excel-spring-boot-starter.version>
+        <oss-spring-boot-starter.version>3.0.0</oss-spring-boot-starter.version>
+        <idempotent-spring-boot-starter.version>0.4.0</idempotent-spring-boot-starter.version>
+        <sensitive-word.version>0.22.0</sensitive-word.version>
+
+        <spring-ai-bom.version>1.0.1</spring-ai-bom.version>
+        <ai-alibaba.version>1.0.0.2</ai-alibaba.version>
+
+        <docker.plugin.version>0.32.0</docker.plugin.version>
+        <spring.checkstyle.plugin>0.0.39</spring.checkstyle.plugin>
+        <git.commit.plugin>9.0.0</git.commit.plugin>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    </properties>
+
+    <!--依赖版本声明-->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- SpringBoot 依赖配置 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--Spring AI-->
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--Alibaba AI-->
+            <dependency>
+                <groupId>com.alibaba.cloud.ai</groupId>
+                <artifactId>spring-ai-alibaba-core</artifactId>
+                <version>${ai-alibaba.version}</version>
+            </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringBoot Admin -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!--redisson-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!--Sharding-JDBC-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc-core</artifactId>
+                <version>${shardingsphere-jdbc.version}</version>
+            </dependency>
+
+            <!-- Dynamic DataSource -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+
+            <!-- 代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!--hutool bom 工具类-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Mybatis 依赖配置 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- pageHelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <!-- io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <!--Swagger-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--Swagger -->
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${swagger-core.version}</version>
+            </dependency>
+
+            <!--Swagger springdoc -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <!--Excel-->
+            <dependency>
+                <groupId>com.pig4cloud.excel</groupId>
+                <artifactId>excel-spring-boot-starter</artifactId>
+                <version>${excel-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!--XSS-->
+            <dependency>
+                <groupId>net.dreamlu</groupId>
+                <artifactId>mica-xss</artifactId>
+                <version>${xss-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!--幂等-->
+            <dependency>
+                <groupId>com.pig4cloud.plugin</groupId>
+                <artifactId>idempotent-spring-boot-starter</artifactId>
+                <version>${idempotent-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!--通用OSS-->
+            <dependency>
+                <groupId>com.pig4cloud.plugin</groupId>
+                <artifactId>oss-spring-boot-starter</artifactId>
+                <version>${oss-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!--调度器-->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <!--注解式请求-->
+            <dependency>
+                <groupId>com.dtflys.forest</groupId>
+                <artifactId>forest-spring-boot3-starter</artifactId>
+                <version>${forest.version}</version>
+            </dependency>
+
+            <!--JavaCV-->
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacv-platform</artifactId>
+                <version>${javacv.version}</version>
+            </dependency>
+
+            <!--敏感词过滤工具-->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-word</artifactId>
+                <version>${sensitive-word.version}</version>
+            </dependency>
+
+            <!--分布式雪花算法ID生成器-->
+            <dependency>
+                <groupId>com.github.yitter</groupId>
+                <artifactId>yitter-idgenerator</artifactId>
+                <version>${yitter-idgenerator.version}</version>
+            </dependency>
+
+            <!--OAuth2第三方接入-->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${just-auth.version}</version>
+            </dependency>
+
+            <!--多数据源-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-datasource</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--公共安全配置模块-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-security</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--dataself通用核心-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-core</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--openfeign模块-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-openfeign</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--Redis缓存模块-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-redis</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--dataself通用工具-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-utils</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--日志模块-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-log</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- 数据权限 -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-datascope</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- 接口文档模块 -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-swagger</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- 调度器 -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-job</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- jdbc -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-jdbc</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- snowflake -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-snowflake</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!-- dataself websocket -->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-framework-websocket</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--system API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-system</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--job API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-job</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--DFS API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-dfs</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--Gen API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-gen</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--Auth API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-auth</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+            <!--AI API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-ai</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!--监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!--监控客户端-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+
+        <!--配置文件处理器元数据提示-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional> <!-- 表示依赖不会传递 -->
+        </dependency>
+
+        <!--兼容 java 17-->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+
+        <!--兼容 java 17-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>
+
+        <!--配置文件加解密-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
+        </dependency>
+
+        <!--junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Spring Test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <modules>
+        <module>dataself-framework</module>
+        <module>dataself-api</module>
+    </modules>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.ico</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.ico</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-dependencies.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                        <layers>
+                            <enabled>true</enabled>
+                        </layers>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <debug>false</debug>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!--打包jar 与git commit 关联插件-->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git.commit.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--因为项目定制了jackson的日期时间序列化/反序列化格式，因此这里要进行配置,不然通过management.info.git.mode=full进行完整git信息监控时会存在问题-->
+                    <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.(id|message|time).*$</includeOnlyProperty>
+                    </includeOnlyProperties>
+                </configuration>
+            </plugin>
+            <!--代码格式插件，默认使用spring 规则-->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>${spring.checkstyle.plugin}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <!-- 开发环境 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <active>dev</active>
+                <nacos.username>nacos</nacos.username>
+                <nacos.password>nacos</nacos.password>
+                <nacos.namespace>dev</nacos.namespace>
+
+                <!-- elk/日志配置 -->
+                <log.dir>logs</log.dir>
+                <log.level>info</log.level>
+                <log.redis.host>127.0.0.1</log.redis.host>
+                <log.redis.password></log.redis.password>
+                <log.redis.port>6379</log.redis.port>
+                <log.redis.key>tw.log</log.redis.key>
+                <log.redis.db>1</log.redis.db>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!-- 测试环境 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <active>test</active>
+            </properties>
+        </profile>
+
+        <!-- 预发布环境 -->
+        <profile>
+            <id>staging</id>
+            <properties>
+                <active>staging</active>
+
+            </properties>
+        </profile>
+
+        <!-- 生产环境 -->
+        <profile>
+            <id>product</id>
+            <properties>
+                <active>pro</active>
+                <nacos.username>nacos</nacos.username>
+                <nacos.password>nacos</nacos.password>
+                <nacos.namespace>pro</nacos.namespace>
+
+                <!-- elk/日志配置 -->
+                <log.dir>logs</log.dir>
+                <log.level>info</log.level>
+                <log.redis.host>127.0.0.1</log.redis.host>
+                <log.redis.password></log.redis.password>
+                <log.redis.port>6379</log.redis.port>
+                <log.redis.key>tw.log</log.redis.key>
+                <log.redis.db>1</log.redis.db>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
+

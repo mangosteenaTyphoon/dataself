@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: dataself-gateway
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+      config:
+        # 配置中心地址
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        # 配置文件格式
+        file-extension: yml
+        # 命名空间
+        namespace: dev
+        # 配置组
+        group: DEFAULT_GROUP
+        # shared-configs:
+          # - data-id: dataself-app-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+    sentinel:
+      # nacos配置持久化
+      datasource:
+        ds:
+          # 采用nacos
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            # 命名空间
+            namespace: dev
+            dataId: sentinel-dataself-gateway
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+  config:
+    import:
+      - optional:nacos:dataself-app-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

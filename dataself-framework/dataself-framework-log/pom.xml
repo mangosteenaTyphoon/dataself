@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dataself-framework</artifactId>
+        <groupId>com.shanzhu</groupId>
+        <version>3.5.4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <artifactId>dataself-framework-log</artifactId>
+
+    <description>日志模块</description>
+
+    <dependencies>
+
+        <!-- dataself安全模块 -->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-framework-security</artifactId>
+        </dependency>
+
+        <!-- dataself system -->
+        <dependency>
+            <groupId>com.shanzhu</groupId>
+            <artifactId>dataself-api-system</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
