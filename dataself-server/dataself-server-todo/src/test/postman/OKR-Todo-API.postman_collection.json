@@ -1,0 +1,331 @@
+{
+  "info": {
+    "name": "OKR-Todo API",
+    "description": "OKR-Todo 系统完整 API 接口集合",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "okr-todo-api-collection",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8084",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "goalId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "taskId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "目标管理",
+      "item": [
+        {
+          "name": "分页查询目标列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/pageQuery?pageNum=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "pageQuery"],
+              "query": [
+                {"key": "pageNum", "value": "1"},
+                {"key": "pageSize", "value": "10"},
+                {"key": "status", "value": "", "disabled": true},
+                {"key": "priority", "value": "", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "查询目标详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "{{goalId}}"]
+            }
+          }
+        },
+        {
+          "name": "新增目标",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"2026年Q1技术提升目标\",\n  \"description\": \"提升Java和微服务架构能力\",\n  \"priority\": \"HIGH\",\n  \"expectedStartTime\": \"2026-01-01 00:00:00\",\n  \"expectedEndTime\": \"2026-03-31 23:59:59\",\n  \"tags\": \"技术,学习\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/goal",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal"]
+            }
+          }
+        },
+        {
+          "name": "编辑目标",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goalId\": {{goalId}},\n  \"title\": \"更新后的目标标题\",\n  \"description\": \"更新后的描述\",\n  \"priority\": \"MEDIUM\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/goal",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal"]
+            }
+          }
+        },
+        {
+          "name": "删除目标",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "{{goalId}}"]
+            }
+          }
+        },
+        {
+          "name": "开始目标",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/start/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "start", "{{goalId}}"]
+            }
+          }
+        },
+        {
+          "name": "完成目标",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/complete/{{goalId}}?summary=目标完成总结",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "complete", "{{goalId}}"],
+              "query": [{"key": "summary", "value": "目标完成总结"}]
+            }
+          }
+        },
+        {
+          "name": "归档目标",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/goal/archive/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["goal", "archive", "{{goalId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "任务管理",
+      "item": [
+        {
+          "name": "分页查询任务列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/pageQuery?pageNum=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "pageQuery"],
+              "query": [
+                {"key": "pageNum", "value": "1"},
+                {"key": "pageSize", "value": "10"},
+                {"key": "goalId", "value": "", "disabled": true},
+                {"key": "status", "value": "", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "查询任务详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "{{taskId}}"]
+            }
+          }
+        },
+        {
+          "name": "查询目标下的任务",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/goal/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "goal", "{{goalId}}"]
+            }
+          }
+        },
+        {
+          "name": "新增任务",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goalId\": {{goalId}},\n  \"title\": \"学习Spring Boot 3.x新特性\",\n  \"description\": \"深入学习Spring Boot 3.x的新特性和最佳实践\",\n  \"priority\": \"HIGH\",\n  \"expectedStartTime\": \"2026-01-01 00:00:00\",\n  \"expectedEndTime\": \"2026-01-15 23:59:59\",\n  \"sortOrder\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/task",
+              "host": ["{{baseUrl}}"],
+              "path": ["task"]
+            }
+          }
+        },
+        {
+          "name": "编辑任务",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": {{taskId}},\n  \"title\": \"更新后的任务标题\",\n  \"description\": \"更新后的描述\",\n  \"priority\": \"MEDIUM\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/task",
+              "host": ["{{baseUrl}}"],
+              "path": ["task"]
+            }
+          }
+        },
+        {
+          "name": "删除任务",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "{{taskId}}"]
+            }
+          }
+        },
+        {
+          "name": "开始任务",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/start/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "start", "{{taskId}}"]
+            }
+          }
+        },
+        {
+          "name": "完成任务",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/complete/{{taskId}}?score=EXCELLENT&summary=任务完成总结",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "complete", "{{taskId}}"],
+              "query": [
+                {"key": "score", "value": "EXCELLENT"},
+                {"key": "summary", "value": "任务完成总结"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "标记未达成",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/task/notAchieved/{{taskId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["task", "notAchieved", "{{taskId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "统计分析",
+      "item": [
+        {
+          "name": "获取目标统计",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/goal",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "goal"]
+            }
+          }
+        },
+        {
+          "name": "获取任务统计",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/task",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "task"]
+            }
+          }
+        },
+        {
+          "name": "获取数据看板",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "dashboard"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  }
+}
