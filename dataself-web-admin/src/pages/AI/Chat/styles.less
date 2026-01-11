@@ -1,0 +1,207 @@
+.ctn {
+    width: 100%;
+    height: calc(100vh - 370px);
+}
+
+.autoHeight {
+    height: 100%;
+}
+
+.maxCtn {
+    width: 100%;
+    height: 100%;
+}
+
+.knowledgeCtn {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    .knowledgeItemIcon {
+        font-size: 35px;
+    }
+
+    .knowledgeItem {
+        display: flex;
+        width: 100%;
+        height: auto;
+        padding: 5px;
+        margin: 8px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+            background: #f5f6f8;
+        }
+
+        .knowledgeItemInfo {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-left: 5px;
+        }
+    }
+
+    // 知识库激活时样式
+    .knowledgeItemActive {
+        background: #f5f6f8;
+    }
+}
+
+.chatListCtn {
+    width: 100%;
+    height: auto;
+    flex: 1;
+    overflow: auto;
+    scrollbar-width: none; // 火狐兼容隐藏滚动条
+    -ms-overflow-style: none; // 兼容其它浏览器隐藏滚动条
+
+    /* Webkit 浏览器（Chrome, Safari）隐藏滚动条 */
+
+    &::-webkit-scrollbar {
+        display: none; // 隐藏滚动条
+    }
+
+    // 没有更多消息提示
+    .noMoreMessagesCtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        color: #999;
+        font-size: 12px;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 10px;
+    }
+
+    .chatInfoCtn {
+        width: 100%;
+        height: auto;
+        display: flex;
+        box-sizing: border-box;
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    // 右布局盒子
+    .chatInfoCtnRight {
+        width: 100%;
+        height: auto;
+        // 元素从做左到右
+        flex-flow: row;
+
+        .chatInfo {
+            width: 100%;
+            height: auto;
+            margin-left: 10px;
+        }
+    }
+
+    // 左布局盒子
+    .chatInfoCtnLeft {
+        width: 100%;
+        height: auto;
+        // 元素从右到左
+        flex-flow: row-reverse;
+
+        .chatInfo {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-flow: column;
+            align-items: flex-end;
+            margin-right: 10px;
+        }
+    }
+
+    // 聊天头像
+    .chatIcon {
+        font-size: 25px;
+    }
+
+    .chatInfoTime {
+        color: rgb(186, 191, 199);
+    }
+
+    .chatInfoDes {
+        width: fit-content;
+        height: auto;
+        box-sizing: border-box;
+        max-width: 90%;
+        padding: 10px 10px 10px 10px;
+        border-radius: 5px;
+        background: #f5f6f8;
+        word-wrap: break-word; /* 允许长单词在需要时换行 */
+        overflow-wrap: break-word; /* 和word-wrap效果相同，推荐使用 */
+        white-space: normal;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        // 等待光标
+        .chatWaitCursor {
+            display: inline-block;
+            width: 2px; /* 设置竖线的宽度 */
+            height: 15px; /* 设置竖线的高度 */
+            background-color: black; /* 竖线的颜色 */
+            animation: blink 1s step-start infinite; /* 闪烁动画 */
+
+            @keyframes blink {
+                0% {
+                    opacity: 1; /* 竖线显示 */
+                }
+                50% {
+                    opacity: 0; /* 竖线隐藏 */
+                }
+                100% {
+                    opacity: 1; /* 竖线显示 */
+                }
+            }
+        }
+    }
+
+    // 工具（语音、复制等）
+    .chatInfoToolCtn {
+        margin-top: 5px;
+
+        .chatInfoTool {
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background: #f5f6f8;
+            }
+        }
+    }
+}
+
+// 全局工具框
+.chatToolCtn {
+    margin-left: 3px;
+
+    // 启用工具
+    .enableTool {
+        color: #4096ff;
+    }
+
+    // 工具默认通用
+    .chatTool {
+        padding: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            background: #f5f6f8;
+        }
+    }
+}
+
+// 聊天框
+.chatCtn {
+    min-height: 32px;
+    padding: 5px;
+}
