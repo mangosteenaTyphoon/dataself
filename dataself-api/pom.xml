@@ -21,6 +21,7 @@
         <module>dataself-api-gen</module>
         <module>dataself-api-auth</module>
         <module>dataself-api-ai</module>
+        <module>dataself-api-todo</module>
     </modules>
 
     <dependencies>

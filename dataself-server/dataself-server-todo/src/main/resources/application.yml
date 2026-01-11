@@ -1,0 +1,56 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    # 应用名称
+    name: dataself-server-todo
+  profiles:
+    # 环境配置
+    active: dev
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+    # 缓存持续时间（秒）
+    cache-duration: 3600
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        # 解决获取IP为内网，一般微服务采用内网安全性、可用性高
+        # ip: 127.0.0.1
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间（空表示使用默认命名空间 public）
+        namespace: dev
+      config:
+        # 配置中心地址
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        # 配置文件格式
+        file-extension: yml
+        # 命名空间（空表示使用默认命名空间 public）
+        namespace: dev
+        # 配置组
+        group: DEFAULT_GROUP
+        # 共享配置
+        # shared-configs:
+          # - data-id: dataself-app-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+    # 暂时修复因sentinel导致的无法启动
+    # openfeign:
+      #lazy-attributes-resolution: true
+  config:
+    import:
+      - optional:nacos:dataself-app-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+
+# 管理端点配置
+management:
+  health:
+    db:
+      # 禁用数据库健康检查
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'

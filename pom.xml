@@ -405,6 +405,13 @@
                 <version>${dataself.version}</version>
             </dependency>
 
+            <!--Todo API-->
+            <dependency>
+                <groupId>com.shanzhu</groupId>
+                <artifactId>dataself-api-todo</artifactId>
+                <version>${dataself.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
